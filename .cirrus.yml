@@ -6,7 +6,7 @@ task:
       cpu: 8
       memory: 32G 
       kvm: true
-    run_script: # To sync source
+    run_script: # To sync sourcea
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
       - git config --global user.name Your Name
