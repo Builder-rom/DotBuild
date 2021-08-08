@@ -11,7 +11,6 @@ task:
       - bash <(curl https://raw.githubusercontent.com/akhilnarang/scripts/master/setup/android_build_env.sh)
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
-      - ccache -M 10G
       
     run_setup: # To sync source
       - ~/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
