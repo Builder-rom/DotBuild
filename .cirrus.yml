@@ -7,10 +7,11 @@ task:
       memory: 32G 
       kvm: true
     run_script: # To sync source
-      - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata
+      - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git
       - bash <(curl https://raw.githubusercontent.com/akhilnarang/scripts/master/setup/android_build_env.sh)
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
+      - ccache -M 10G
       
     run_setup: # To sync source
       - ~/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
