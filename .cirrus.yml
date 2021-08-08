@@ -1,10 +1,10 @@
 task:
     name: builder
-    timeout_in: 240m
+    timeout_in: 5h
     container:
       image: ubuntu:latest
       cpu: 8  
-      memory: 60G 
+      memory: 32G 
     run_script: # To sync source
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata
       - apt upgrade -y
