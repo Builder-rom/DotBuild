@@ -2,7 +2,7 @@ task:
     name: builder
     timeout_in: 5h
     container:
-      image: ubuntu:latest
+      image: debian:latest
       cpu: 8
       memory: 32G 
     run_script: # To sync sourcea
@@ -18,6 +18,6 @@ task:
       - git clone https://github.com/Orangeskai/android_device_realme_mt6785-common -b lineage-18.1-plus --depth=1 device/realme/mt6785-common
       - source build/envsetup.sh
       - lunch dot_RMX2001-userdebug
-      - make bacon -j8
+      - make bacon -j11
       - up=out/target/product/RMX2001/*.zip
       - curl --upload-file $up https://transfer.sh/$($up); echo
