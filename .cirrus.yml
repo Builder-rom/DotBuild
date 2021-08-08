@@ -6,6 +6,7 @@ compute_engine_instance:
   memory: 32G # optional. Defaults to 4G.
   disk: 300 # optional. By default uses the smallest disk size required by the image.
   timeout_in: 5h
+  task:
   run_script: # To sync sourcea
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
