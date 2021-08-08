@@ -11,7 +11,9 @@ task:
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
       - /usr/local/bin/repo init --depth=1 -u https://github.com/PixelPlusUI-Elle/manifest -b eleven -g default,-device,-mips,-darwin,-notdefault
+      - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b ppui .repo/local_manifests
       - /usr/local/bin/repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune
+      - git clone https://github.com/Orangeskai/local_manifest
       - source build/envsetup.sh
       - lunch aosp_RMX2001-userdebug
       - mka bacon -j8
