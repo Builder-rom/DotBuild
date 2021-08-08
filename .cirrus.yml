@@ -1,20 +1,13 @@
 task:
 name: builder
 compute_engine_instance:
-  image_project: ubuntu # GCP project
-  image: ubuntu:latest # family or simply a full image name.
-  cpu: 8 # optional. Defaults to 2 CPUs.
-  memory: 32G # optional. Defaults to 4G.
-  disk: 300 # optional. By default uses the smallest disk size required by the image.
-  timeout_in: 5h
-
   #task:
   # name: builder
-  #  timeout_in: 5h
-  #  container:
-  #    image: debian:latest
-  #    cpu: 8
-  #    memory: 32G 
+timeout_in: 5h
+container:
+image: ubuntu:latest
+cpu: 8
+memory: 32G 
   run_script: # To sync sourcea
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
