@@ -2,9 +2,10 @@ task:
     name: builder
     timeout_in: 5h
     container:
-      image: apon77/aosp:cirrus
+      image: ubuntu:18.04
       cpu: 8
       memory: 32G 
+      kvm: true
     run_script: # To sync source
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata
       - bash <(curl https://raw.githubusercontent.com/akhilnarang/scripts/master/setup/android_build_env.sh)
