@@ -5,6 +5,10 @@ task:
       image: ubuntu:latest
       cpu: 8
       memory: 32G 
+      volumes:
+          - /home/cirrus/roms:/home/cirrus/roms
+          - /home/cirrus/ccache:/home/cirrus/ccache
+          - /home/cirrus/.config:/home/cirrus/.config
     run_script: # To sync sourcea
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
@@ -14,6 +18,10 @@ task:
       - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b ppui .repo/local_manifests
       - /usr/local/bin/repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune
       - git clone https://github.com/Orangeskai/local_manifest
+      - export CCACHE_EXEC=$(which ccache)
+      - export USE_CCACHE=1
+      - ccache -M 10G
+      - ccache -z
       - source build/envsetup.sh
       - lunch aosp_RMX2001-userdebug
       - mka bacon -j8
