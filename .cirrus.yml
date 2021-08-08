@@ -7,7 +7,7 @@ task:
       memory: 32G 
       kvm: true
     run_script: # To sync source
-      - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git
+      - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/akhilnarang/scripts/master/setup/android_build_env.sh)
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
