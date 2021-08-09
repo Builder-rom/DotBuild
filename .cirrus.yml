@@ -27,6 +27,6 @@ task:
       - ccache -z
       - source build/envsetup.sh
       - lunch dot_RMX2001-userdebug
-      - mka bacon -j8
+      - make bacon -j8
       - up=out/target/product/RMX2001/*.zip
       - curl --upload-file $up https://transfer.sh/$($up); echo
