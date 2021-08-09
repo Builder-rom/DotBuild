@@ -26,8 +26,8 @@ task:
       - export USE_CCACHE=1
       - ccache -M 10G
       - ccache -z
-   build_script:
       - source build/envsetup.sh
+    build_script:
       - lunch dot_RMX2001-userdebug
       - make bacon -j10
       - up=out/target/product/RMX2001/*.zip
