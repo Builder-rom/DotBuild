@@ -10,11 +10,11 @@ task:
           - /home/cirrus/ccache:/home/cirrus/ccache
           - /home/cirrus/.config:/home/cirrus/.config
     run_script: # To sync sourcea
-      - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo coreutils
+      - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
-      - ENV USE_CCACHE=1
-      - ENV CCACHE_SIZE=50G
-      - ENV CCACHE_EXEC=/usr/bin/ccache
+      - export USE_CCACHE=1
+      - export CCACHE_SIZE=50G
+      - export CCACHE_EXEC=/usr/bin/ccache
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
       - /usr/local/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
