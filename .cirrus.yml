@@ -1,7 +1,7 @@
 task:
     name: builder
     timeout_in: 5h
-    docker_builder:
+    container:
       image: ubuntu:latest
       cpu: 8
       memory: 32G
@@ -9,6 +9,13 @@ task:
           - /home/cirrus/roms:/home/cirrus/roms
           - /home/cirrus/ccache:/home/cirrus/ccache
           - /home/cirrus/.config:/home/cirrus/.config
+      node_modules_cache:
+      folder: cache
+      reupload_on_changes: false # since there is a fingerprint script
+      fingerprint_script:
+      - /usr/local/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
+      - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b master .repo/local_manifests
+      check_task:
     run_script: # To sync sourcea
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
