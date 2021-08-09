@@ -12,10 +12,13 @@ task:
     run_script: # To sync sourcea
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
+      - ENV USE_CCACHE=1
+      - ENV CCACHE_SIZE=50G
+      - ENV CCACHE_EXEC=/usr/bin/ccache
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
-      - /usr/local/bin/repo init --depth=1 -u https://github.com/PixelPlusUI-Elle/manifest -b eleven -g default,-device,-mips,-darwin,-notdefault
-      - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b ppui .repo/local_manifests
+      - /usr/local/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
+      - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b master .repo/local_manifests
       - /usr/local/bin/repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune
       - git clone https://github.com/Orangeskai/local_manifest
       - export CCACHE_EXEC=$(which ccache)
