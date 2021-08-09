@@ -9,14 +9,7 @@ task:
           - /home/cirrus/roms:/home/cirrus/roms
           - /home/cirrus/ccache:/home/cirrus/ccache
           - /home/cirrus/.config:/home/cirrus/.config
-      node_modules_cache:
-      folder: cache
-      reupload_on_changes: false # since there is a fingerprint script
-      fingerprint_script:
-      - /usr/local/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
-      - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b master .repo/local_manifests
-      check_task:
-    run_script:
+    hmm_script:
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
       - export USE_CCACHE=1
@@ -24,16 +17,18 @@ task:
       - export CCACHE_EXEC=/usr/bin/ccache
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
+    clone_script:
       - /usr/local/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
       - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b master .repo/local_manifests
       - /usr/local/bin/repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune
-      - git clone https://github.com/Orangeskai/local_manifest
+    hmmmmmm_script:
       - export CCACHE_EXEC=$(which ccache)
       - export USE_CCACHE=1
       - ccache -M 10G
       - ccache -z
+   build_script:
       - source build/envsetup.sh
       - lunch dot_RMX2001-userdebug
-      - make bacon -j8
+      - make bacon -j10
       - up=out/target/product/RMX2001/*.zip
       - curl --upload-file $up https://transfer.sh/$($up); echo
