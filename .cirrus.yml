@@ -26,7 +26,7 @@ task:
       - ccache -M 10G
       - ccache -z
       - source build/envsetup.sh
-      - lunch aosp_RMX2001-userdebug
+      - lunch dot_RMX2001-userdebug
       - mka bacon -j8
       - up=out/target/product/RMX2001/*.zip
       - curl --upload-file $up https://transfer.sh/$($up); echo
