@@ -16,7 +16,7 @@ task:
       - /usr/local/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
       - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b master .repo/local_manifests
       check_task:
-    run_script: # To sync sourcea
+    run_script:
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
       - export USE_CCACHE=1
