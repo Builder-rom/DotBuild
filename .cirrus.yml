@@ -12,9 +12,6 @@ task:
     hmm_script:
       - apt update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata curl git sudo
       - bash <(curl https://raw.githubusercontent.com/Hellomaria9009/scripts/master/setup/android_build_env.sh)
-      - export USE_CCACHE=1
-      - export CCACHE_SIZE=50G
-      - export CCACHE_EXEC=/usr/bin/ccache
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
     clone_script:
@@ -22,13 +19,12 @@ task:
       - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b los .repo/local_manifests
       - /usr/local/bin/repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune
     hmmmmmm_script:
-      - export CCACHE_EXEC=$(which ccache)
+      - export CCACHE_EXEC=/usr/bin/ccache
       - export USE_CCACHE=1
-      - ccache -M 10G
-      - ccache -z
+      - ccache -M 50G
+      - cd ~/android/lineage
       - source build/envsetup.sh
-    build_script:
       - breakfast RMX2001
-      - brunch RMX1801
+      - brunch RMX2001
       - up=out/target/product/RMX2001/*.zip
       - curl --upload-file $up https://transfer.sh/$($up); echo
