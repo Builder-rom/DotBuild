@@ -22,7 +22,7 @@ task:
       - export CCACHE_EXEC=/usr/bin/ccache
       - export USE_CCACHE=1
       - ccache -M 50G
-      - cd ~/android/lineage
+      - cd lineage
       - source build/envsetup.sh
       - breakfast RMX2001
       - brunch RMX2001
