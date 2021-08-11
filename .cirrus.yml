@@ -18,8 +18,8 @@ task:
       - git config --global user.name Your Name
       - git config --global user.email you@example.com
     clone_script:
-      - /usr/local/bin/repo init --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
-      - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b master .repo/local_manifests
+      - /usr/local/bin/repo init --depth=1 -u git://github.com/LineageOS/android.git -b lineage-18.1 -g default,-device,-mips,-darwin,-notdefault
+      - git clone https://github.com/Orangeskai/local_manifest.git --depth 1 -b los .repo/local_manifests
       - /usr/local/bin/repo sync -c -j8 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune
     hmmmmmm_script:
       - export CCACHE_EXEC=$(which ccache)
@@ -28,7 +28,7 @@ task:
       - ccache -z
       - source build/envsetup.sh
     build_script:
-      - lunch dot_RMX2001-userdebug
-      - make bacon -j10
+      - breakfast RMX2001
+      - brunch RMX1801
       - up=out/target/product/RMX2001/*.zip
       - curl --upload-file $up https://transfer.sh/$($up); echo
